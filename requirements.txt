@@ -1,0 +1,9 @@
+Flask==3.0.0
+firebase-admin==6.2.0
+pandas
+Werkzeug==3.0.1
+Flask-Limiter
+Flask-Talisman
+Flask-WTF
+pymongo[srv]
+dnspython

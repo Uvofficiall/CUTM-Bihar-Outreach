@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUTM Admin Dashboard</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- DataTables CSS for modern tables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/cutm.png') }}">
+
+    <style>
+        :root {
+            --primary-blue: #0A3254;
+            --primary-orange: #F57200;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--primary-blue);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        .stat-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .bg-orange-light {
+            background-color: rgba(245, 114, 0, 0.1);
+            color: var(--primary-orange);
+        }
+
+        .bg-blue-light {
+            background-color: rgba(10, 50, 84, 0.1);
+            color: var(--primary-blue);
+        }
+
+        .bg-green-light {
+            background-color: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .table-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Dashboard Adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto !important;
+                width: 100% !important;
+            }
+
+            .sidebar-nav-container {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+            }
+
+            .sidebar hr {
+                display: none;
+            }
+
+            .sidebar .nav-item {
+                margin-right: 10px;
+            }
+            .main-content {
+                height: auto !important;
+            }
+        }
+ 
+        /* Status Colors */
+        .status-confirm { background-color: #d1e7dd !important; color: #0f5132 !important; }
+        .status-ready-for-campus { background-color: #198754 !important; color: #ffffff !important; }
+        .status-pending { background-color: #f8d7da !important; color: #842029 !important; }
+        .status-not-ready { background-color: #fd7e14 !important; color: #ffffff !important; }
+        
+        .status-select {
+            font-weight: 500;
+            border-radius: 6px;
+            padding: 2px 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex flex-column flex-md-row">
+        <!-- Sidebar -->
+        <div class="sidebar d-flex flex-column p-3" style="width: 260px; max-width: 100%;">
+            <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="{{ url_for('static', filename='images/cutm.png') }}" alt="" width="30" height="30"
+                    class="me-2 rounded">
+                <span class="fs-5 fw-bold">Admin Portal</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column sidebar-nav-container mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" aria-current="page">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#leadsTableSection" class="nav-link">
+                        <i class="bi bi-people"></i> All Leads
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div>
+                <a href="/admin/logout" class="btn btn-outline-light w-100">
+                    <i class="bi bi-box-arrow-right"></i> Sign out
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-grow-1 main-content w-100 overflow-auto" style="height: 100vh;">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold mb-0 text-dark">Leads Overview</h3>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success shadow-sm" style="border: none;" data-bs-toggle="modal" data-bs-target="#addLeadModal">
+                        <i class="bi bi-plus-lg me-1"></i> Add New Lead
+                    </button>
+                    <button class="btn btn-primary shadow-sm" style="background-color: #F57200; border: none;"
+                        onclick="window.location.href='/api/export'">
+                        <i class="bi bi-file-earmark-excel me-1"></i> Export Data (CSV)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Warning message if DB is not connected -->
+            <div class="alert alert-warning d-none mb-4" id="dbWarning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> Database is not connected or initialized properly.
+                Make sure your <strong>MongoDB connection string</strong> is correct and your <strong>IP address is whitelisted</strong> in MongoDB Atlas.
+            </div>
+
+            <!-- Stats row -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card stat-card h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-orange-light me-3">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-0 fw-semibold">Total Leads</h6>
+                                <h3 class="fw-bold mb-0" id="totalLeadsCount">-</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-blue-light me-3">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-0 fw-semibold">Top District</h6>
+                                <h3 class="fw-bold mb-0" id="topDistrict" style="font-size: 1.5rem;">-</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-green-light me-3">
+                                <i class="bi bi-book"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-0 fw-semibold">Top Course Requested</h6>
+                                <h3 class="fw-bold mb-0" id="topCourse" style="font-size: 1.5rem;">-</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts row -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card table-card h-100 p-4">
+                        <h5 class="fw-bold mb-3">District Distribution</h5>
+                        <div style="height: 300px;">
+                            <canvas id="districtChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card table-card h-100 p-4">
+                        <h5 class="fw-bold mb-3">Course Interests</h5>
+                        <div style="height: 300px;">
+                            <canvas id="courseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="card table-card p-4 mb-4" id="leadsTableSection">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                    <h5 class="fw-bold mb-0">Student Leads Data</h5>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Status Filter">
+                        <button type="button" class="btn btn-outline-secondary filter-btn active" data-status="all">All</button>
+                        <button type="button" class="btn btn-outline-danger filter-btn" data-status="pending">Pending</button>
+                        <button type="button" class="btn btn-outline-success filter-btn" data-status="confirm">Confirm</button>
+                        <button type="button" class="btn btn-outline-dark filter-btn" data-status="ready for campus" style="background-color: #198754; color: white; border-color: #198754;">Ready for Campus</button>
+                        <button type="button" class="btn btn-outline-warning filter-btn" data-status="not ready" style="background-color: #fd7e14; color: white; border-color: #fd7e14;">Not Ready</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="leadsTable" class="table table-hover w-100 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Mobile</th>
+                                <th>District</th>
+                                <th>Class</th>
+                                <th>Course</th>
+                                <th>Status</th>
+                                <th>Date Applied</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr>
+                                <td colspan="9" class="text-center py-4">Loading data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    <!-- Add Lead Modal -->
+    <div class="modal fade" id="addLeadModal" tabindex="-1" aria-labelledby="addLeadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLeadModalLabel">Add New Student Lead</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addLeadForm">
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="studentName" required placeholder="Enter full name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentGender" class="form-label">Gender</label>
+                            <select class="form-select" id="studentGender" required>
+                                <option value="" selected disabled>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentMobile" class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="studentMobile" pattern="[0-9]{10}" required placeholder="10-digit mobile number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentDistrict" class="form-label">District</label>
+                            <select class="form-select" id="studentDistrict" required>
+                                <option value="" selected disabled>Select District</option>
+                                <option value="Araria - अररिया">Araria - अररिया</option>
+                                <option value="Arwal - अरवल">Arwal - अरवल</option>
+                                <option value="Aurangabad - औरंगाबाद">Aurangabad - औरंगाबाद</option>
+                                <option value="Banka - बांका">Banka - बांका</option>
+                                <option value="Begusarai - बेगूसराय">Begusarai - बेगूसराय</option>
+                                <option value="Bhagalpur - भागलपुर">Bhagalpur - भागलपुर</option>
+                                <option value="Bhojpur - भोजपुर">Bhojpur - भोजपुर</option>
+                                <option value="Buxar - बक्सर">Buxar - बक्सर</option>
+                                <option value="Darbhanga - दरभंगा">Darbhanga - दरभंगा</option>
+                                <option value="East Champaran - पूर्वी चम्पारण">East Champaran - पूर्वी चम्पारण</option>
+                                <option value="Gaya - गया">Gaya - गया</option>
+                                <option value="Gopalganj - गोपालगंज">Gopalganj - गोपालगंज</option>
+                                <option value="Jamui - जमुई">Jamui - जमुई</option>
+                                <option value="Jehanabad - जहानाबाद">Jehanabad - जहानाबाद</option>
+                                <option value="Kaimur - कैमूर">Kaimur - कैमूर</option>
+                                <option value="Katihar - कटिहार">Katihar - कटिहार</option>
+                                <option value="Khagaria - खगड़िया">Khagaria - खगड़िया</option>
+                                <option value="Kishanganj - किशनगंज">Kishanganj - किशनगंज</option>
+                                <option value="Lakhisarai - लखीसराय">Lakhisarai - लखीसराय</option>
+                                <option value="Madhepura - मधेपुरा">Madhepura - मधेपुरा</option>
+                                <option value="Madhubani - मधुबनी">Madhubani - मधुबनी</option>
+                                <option value="Munger - मुंगेर">Munger - मुंगेर</option>
+                                <option value="Muzaffarpur - मुजफ्फरपुर">Muzaffarpur - मुजफ्फरपुर</option>
+                                <option value="Nalanda - नालंदा">Nalanda - नालंदा</option>
+                                <option value="Nawada - नवादा">Nawada - नवादा</option>
+                                <option value="West Champaran - पश्चिमी चम्पारण">West Champaran - पश्चिमी चम्पारण</option>
+                                <option value="Patna - पटना">Patna - पटना</option>
+                                <option value="Purnia - पूर्णिया">Purnia - पूर्णिया</option>
+                                <option value="Rohtas - रोहतास">Rohtas - रोहतास</option>
+                                <option value="Saharsa - सहरसा">Saharsa - सहरसा</option>
+                                <option value="Samastipur - समस्तीपुर">Samastipur - समस्तीपुर</option>
+                                <option value="Saran - सारन">Saran - सारन</option>
+                                <option value="Sheikhpura - शेखपुरा">Sheikhpura - शेखपुरा</option>
+                                <option value="Sheohar - शिवहर">Sheohar - शिवहर</option>
+                                <option value="Sitamarhi - सीतामढ़ी">Sitamarhi - सीतामढ़ी</option>
+                                <option value="Siwan - सीवान">Siwan - सीवान</option>
+                                <option value="Supaul - सुपौल">Supaul - सुपौल</option>
+                                <option value="Vaishali - वैशाली">Vaishali - वैशाली</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentClass" class="form-label">Qualification / Class</label>
+                            <select class="form-select" id="studentClass" required>
+                                <option value="" selected disabled>Select Qualification</option>
+                                <option value="10th">10th Pass</option>
+                                <option value="12th">12th Pass</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentCourse" class="form-label">Course Interest</label>
+                            <select class="form-select" id="studentCourse" required>
+                                <option value="" selected disabled>Select Course</option>
+                                <option value="B.Tech">B.Tech (Engineering)</option>
+                                <option value="BCA">BCA (Computer Applications)</option>
+                                <option value="BBA">BBA (Business Administration)</option>
+                                <option value="MBA">MBA (Agribusiness)</option>
+                                <option value="Diploma">Diploma (Engineering)</option>
+                                <option value="B.Sc">B.Sc (Agriculture/Science)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentStatus" class="form-label">Lead Status</label>
+                            <select class="form-select" id="studentStatus" required>
+                                <option value="pending" selected>Pending</option>
+                                <option value="confirm">Confirm</option>
+                                <option value="ready for campus">Ready for Campus</option>
+                                <option value="not ready">Not Ready</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveLeadBtn">Save Lead</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Lead Modal -->
+    <div class="modal fade" id="editLeadModal" tabindex="-1" aria-labelledby="editLeadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editLeadModalLabel">Edit Student Lead</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editLeadForm">
+                        <input type="hidden" id="editLeadId">
+                        <div class="mb-3">
+                            <label for="editStudentName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="editStudentName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentGender" class="form-label">Gender</label>
+                            <select class="form-select" id="editStudentGender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentMobile" class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="editStudentMobile" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentDistrict" class="form-label">District</label>
+                            <select class="form-select" id="editStudentDistrict" required>
+                                <option value="" selected disabled>Select District</option>
+                                <option value="Araria - अररिया">Araria - अररिया</option>
+                                <option value="Arwal - अरवल">Arwal - अरवल</option>
+                                <option value="Aurangabad - औरंगाबाद">Aurangabad - औरंगाबाद</option>
+                                <option value="Banka - बांका">Banka - बांका</option>
+                                <option value="Begusarai - बेगूसराय">Begusarai - बेगूसराय</option>
+                                <option value="Bhagalpur - भागलपुर">Bhagalpur - भागलपुर</option>
+                                <option value="Bhojpur - भोजपुर">Bhojpur - भोजपुर</option>
+                                <option value="Buxar - बक्सर">Buxar - बक्सर</option>
+                                <option value="Darbhanga - दरभंगा">Darbhanga - दरभंगा</option>
+                                <option value="East Champaran - पूर्वी चम्पारण">East Champaran - पूर्वी चम्पारण</option>
+                                <option value="Gaya - गया">Gaya - गया</option>
+                                <option value="Gopalganj - गोपालगंज">Gopalganj - गोपालगंज</option>
+                                <option value="Jamui - जमुई">Jamui - जमुई</option>
+                                <option value="Jehanabad - जहानाबाद">Jehanabad - जहानाबाद</option>
+                                <option value="Kaimur - कैमूर">Kaimur - कैमूर</option>
+                                <option value="Katihar - कटिहार">Katihar - कटिहार</option>
+                                <option value="Khagaria - खगड़िया">Khagaria - खगड़िया</option>
+                                <option value="Kishanganj - किशनगंज">Kishanganj - किशनगंज</option>
+                                <option value="Lakhisarai - लखीसराय">Lakhisarai - लखीसराय</option>
+                                <option value="Madhepura - मधेपुरा">Madhepura - मधेपुरा</option>
+                                <option value="Madhubani - मधुबनी">Madhubani - मधुबनी</option>
+                                <option value="Munger - मुंगेर">Munger - मुंगेर</option>
+                                <option value="Muzaffarpur - मुजफ्फरपुर">Muzaffarpur - मुजफ्फरपुर</option>
+                                <option value="Nalanda - नालंदा">Nalanda - नालंदा</option>
+                                <option value="Nawada - नवादा">Nawada - नवादा</option>
+                                <option value="West Champaran - पश्चिमी चम्पारण">West Champaran - पश्चिमी चम्पारण</option>
+                                <option value="Patna - पटना">Patna - पटना</option>
+                                <option value="Purnia - पूर्णिया">Purnia - पूर्णिया</option>
+                                <option value="Rohtas - रोहतास">Rohtas - रोहतास</option>
+                                <option value="Saharsa - सहरसा">Saharsa - सहरसा</option>
+                                <option value="Samastipur - समस्तीपुर">Samastipur - समस्तीपुर</option>
+                                <option value="Saran - सारन">Saran - सारन</option>
+                                <option value="Sheikhpura - शेखपुरा">Sheikhpura - शेखपुरा</option>
+                                <option value="Sheohar - शिवहर">Sheohar - शिवहर</option>
+                                <option value="Sitamarhi - सीतामढ़ी">Sitamarhi - सीतामढ़ी</option>
+                                <option value="Siwan - सीवान">Siwan - सीवान</option>
+                                <option value="Supaul - सुपौल">Supaul - सुपौल</option>
+                                <option value="Vaishali - वैशाली">Vaishali - वैशाली</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentClass" class="form-label">Qualification / Class</label>
+                            <select class="form-select" id="editStudentClass" required>
+                                <option value="" selected disabled>Select Qualification</option>
+                                <option value="10th">10th Pass</option>
+                                <option value="12th">12th Pass</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentCourse" class="form-label">Course Interest</label>
+                            <select class="form-select" id="editStudentCourse" required>
+                                <option value="" selected disabled>Select Course</option>
+                                <option value="B.Tech">B.Tech (Engineering)</option>
+                                <option value="BCA">BCA (Computer Applications)</option>
+                                <option value="BBA">BBA (Business Administration)</option>
+                                <option value="MBA">MBA (Agribusiness)</option>
+                                <option value="Diploma">Diploma (Engineering)</option>
+                                <option value="B.Sc">B.Sc (Agriculture/Science)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStudentStatus" class="form-label">Lead Status</label>
+                            <select class="form-select" id="editStudentStatus" required>
+                                <option value="pending">Pending</option>
+                                <option value="confirm">Confirm</option>
+                                <option value="ready for campus">Ready for Campus</option>
+                                <option value="not ready">Not Ready</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="updateLeadBtn">Update Lead</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+            <footer class="text-center py-4 mt-4 text-muted border-top">
+                <p class="mb-0 small">&copy; 2026 CUTM Bihar Outreach. All rights reserved.</p>
+                <small style="font-size: 0.75rem;">Made with ❤️ by CUTM Bihar Outreach Team</small>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</body> 
+
+</html>

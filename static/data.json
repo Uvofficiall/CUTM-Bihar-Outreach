@@ -1,0 +1,67 @@
+{
+  "stats": [
+    {"value": "60+", "label": "Industry Sponsored Labs"},
+    {"value": "11K+", "label": "Students"},
+    {"value": "220+", "label": "Faculty Members"},
+    {"value": "200+", "label": "Patents Published"},
+    {"value": "110+", "label": "Manufacturing Units"},
+    {"value": "7", "label": "Campuses"}
+  ],
+  "schools": [
+    {"name": "Engineering", "icon": "fa-solid fa-cogs"},
+    {"name": "BBA", "icon": "fa-solid fa-chart-line"},
+    {"name": "BCA", "icon": "fa-solid fa-stethoscope"},
+    {"name": "Diploma", "icon": "fa-solid fa-drafting-compass"}
+  ],
+  "programs": {
+    "undergraduate": [
+      {"prefix": "", "name": "Computer Science & Engineering (CSE)", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "Mechanical Engineering", "icon": "fa-solid fa-syringe"},
+      {"prefix": "", "name": "Civil Engineering", "icon": "fa-solid fa-capsules"},
+      {"prefix": "", "name": "Electrical & Electronics Engineering (EEE)", "icon": "fa-solid fa-atom"},
+      {"prefix": "", "name": "Electronics & Communication Engineering (ECE)", "icon": "fa-solid fa-dna"},
+      {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-ruler-combined"},
+      {"prefix": "", "name": "Aerospace Engineering", "icon": "fa-solid fa-fingerprint"},
+      {"prefix": "", "name": "Biotechnology Engineering", "icon": "fa-solid fa-users-cog"}
+    ],
+    "postgraduate": [
+      {"prefix": "", "name": "Mechanical Engineering", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "Civil Engineering", "icon": "fa-solid fa-syringe"},
+      {"prefix": "", "name": "Electrical Engineering", "icon": "fa-solid fa-capsules"},
+      {"prefix": "", "name": "Electronics & Communication Engineering", "icon": "fa-solid fa-atom"},
+      {"prefix": "", "name": "Computer Science Engineering", "icon": "fa-solid fa-dna"},
+      {"prefix": "", "name": "Information Technology", "icon": "fa-solid fa-ruler-combined"},
+      {"prefix": "", "name": "Automobile Engineering", "icon": "fa-solid fa-fingerprint"},
+      {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-users-cog"}
+    ],
+    "phd": [
+      {"prefix": "", "name": "BBA (General)", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "BBA (Healthcare Management)", "icon": "fa-solid fa-users-cog"}
+    ],
+    "diploma": [
+      {"prefix": "", "name": "Bachelor of Computer Applications (BCA) ", "icon": "fa-solid fa-user-nurse"}
+    ]
+  },
+  "placements": [
+    {"name": "Accenture", "img": "/static/images/placement_accenture.jpg"},
+    {"name": "Berger", "img": "/static/images/placement_berger.jpg"},
+    {"name": "Cognizant", "img": "/static/images/placement_cognizant.jpg"},
+    {"name": "HDFC", "img": "/static/images/placement_hdfc.jpg"},
+    {"name": "JSW", "img": "/static/images/placement_jsw.jpg"},
+    {"name": "Company", "img": "/static/images/placement_001.jpg"},
+    {"name": "Company", "img": "/static/images/placement_002.jpg"},
+    {"name": "Company", "img": "/static/images/placement_003.jpg"},
+    {"name": "Company", "img": "/static/images/placement_004.jpg"},
+    {"name": "Company", "img": "/static/images/placement_005.jpg"},
+    {"name": "Company", "img": "/static/images/placement_006.jpg"},
+    {"name": "Company", "img": "/static/images/placement_007.jpg"},
+    {"name": "Company", "img": "/static/images/placement_008.jpg"},
+    {"name": "Company", "img": "/static/images/placement_009.jpg"},
+    {"name": "Company", "img": "/static/images/placement_010.jpg"},
+    {"name": "Company", "img": "/static/images/placement_011.jpg"},
+    {"name": "Company", "img": "/static/images/placement_012.jpg"},
+    {"name": "Company", "img": "/static/images/placement_013.jpg"},
+    {"name": "Company", "img": "/static/images/placement_014.jpg"},
+    {"name": "Company", "img": "/static/images/placement_015.jpg"}
+  ]
+}

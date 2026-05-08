@@ -1,0 +1,62 @@
+{
+  "stats": [
+    {"value": "60+", "label": "Industry Sponsored Labs"},
+    {"value": "11K+", "label": "Students"},
+    {"value": "220+", "label": "Faculty Members"},
+    {"value": "200+", "label": "Patents Published"},
+    {"value": "110+", "label": "Manufacturing Units"},
+    {"value": "7", "label": "Campuses"}
+  ],
+  "schools": [
+    {"name": "Engineering", "icon": "fa-solid fa-cogs"},
+    {"name": "BBA", "icon": "fa-solid fa-chart-line"},
+    {"name": "BCA", "icon": "fa-solid fa-stethoscope"},
+    {"name": "Diploma", "icon": "fa-solid fa-drafting-compass"}
+  ],
+  "programs": {
+    "undergraduate": [
+      {"prefix": "", "name": "Computer Science & Engineering (CSE)", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "Mechanical Engineering", "icon": "fa-solid fa-syringe"},
+      {"prefix": "", "name": "Civil Engineering", "icon": "fa-solid fa-capsules"},
+      {"prefix": "", "name": "Electrical & Electronics Engineering (EEE)", "icon": "fa-solid fa-atom"},
+      {"prefix": "", "name": "Electronics & Communication Engineering (ECE)", "icon": "fa-solid fa-dna"},
+      {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-ruler-combined"},
+      {"prefix": "", "name": "Aerospace Engineering", "icon": "fa-solid fa-fingerprint"},
+      {"prefix": "", "name": "Biotechnology Engineering", "icon": "fa-solid fa-users-cog"}
+    ],
+    "postgraduate": [
+      {"prefix": "", "name": "Mechanical Engineering", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "Civil Engineering", "icon": "fa-solid fa-syringe"},
+      {"prefix": "", "name": "Electrical Engineering", "icon": "fa-solid fa-capsules"},
+      {"prefix": "", "name": "Electronics & Communication Engineering", "icon": "fa-solid fa-atom"},
+      {"prefix": "", "name": "Computer Science Engineering", "icon": "fa-solid fa-dna"},
+      {"prefix": "", "name": "Information Technology", "icon": "fa-solid fa-ruler-combined"},
+      {"prefix": "", "name": "Automobile Engineering", "icon": "fa-solid fa-fingerprint"},
+      {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-users-cog"}
+    ],
+    "phd": [
+      {"prefix": "", "name": "BBA (General)", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "BBA (Healthcare Management)", "icon": "fa-solid fa-users-cog"}
+    ],
+    "diploma": [
+      {"prefix": "", "name": "Bachelor of Computer Applications (BCA) ", "icon": "fa-solid fa-user-nurse"}
+    ]
+  },
+  "placements": [
+    {"name": "Bosch", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bosch_logo.svg/512px-Bosch_logo.svg.png"},
+    {"name": "Dassault", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Dassault_Syst%C3%A8mes_logo.svg/512px-Dassault_Syst%C3%A8mes_logo.svg.png"},
+    {"name": "Directi", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Directi_Logo.png/512px-Directi_Logo.png"},
+    {"name": "Ashok Leyland", "img": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Ashok_Leyland_logo.svg/512px-Ashok_Leyland_logo.svg.png"},
+    {"name": "DuPont", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/DuPont_logo.svg/512px-DuPont_logo.svg.png"},
+    {"name": "Axis Bank", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/512px-Axis_Bank_logo.svg.png"},
+    {"name": "Gateway", "img": "https://via.placeholder.com/150x50/ffffff/000000?text=Gateway+TechnoLabs"},
+    {"name": "Piramal", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Piramal_Group_logo.svg/512px-Piramal_Group_logo.svg.png"},
+    {"name": "Amazon", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png"},
+    {"name": "YARDI", "img": "https://via.placeholder.com/150x50/ffffff/1d4ed8?text=YARDI"},
+    {"name": "HDFC", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/512px-HDFC_Bank_Logo.svg.png"},
+    {"name": "Cognizant", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Cognizant_logo_2022.svg/512px-Cognizant_logo_2022.svg.png"},
+    {"name": "Berger", "img": "https://via.placeholder.com/150x50/ffffff/10b981?text=Berger"},
+    {"name": "JSW", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/JSW_Group_logo.svg/512px-JSW_Group_logo.svg.png"},
+    {"name": "Accenture", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png"}
+  ]
+}
