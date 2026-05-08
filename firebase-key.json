@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "bihar-outreach",
+  "private_key_id": "cc60bf473e4373177bad0cc8adcaec938d115ba9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIIk7jlVVJWS33\n8+TvjxIQfN5g6Y0GO0k3gveDNF8/irHnaJnqxxPzMBIt0/6ytIzoj6Tx+qoBUwu8\n9uXBoT0iqsBuztUGPekMCQsVK0VEYwwsEDWwyTRRtqQ9QxWfBUGFYPAHGoZEhMHJ\nxPsIKZLBIBPOlfehdgCS9O9D3pSUbjzg9sKMZ1/8DdhZcCfBjDDF6Hi/h7xj/uUK\n53nUVxCB9N/Pt6vy2VzFVi/e+BeKVSrZhd5uyAFsefxZjzxmQz52/AYp3BE0hWc6\n/kPB1Ihx9dUVQUeDM8ljHAvmu8nNm/YVNxHF62MzLucI4T0xRmyuNRJ9d8kH6QFM\njpkLqG7zAgMBAAECggEAOinSYIzpZPBAjlO5ALBFUTphDKxDmoCHZlUvJtgFKHvf\n+T9qoBNsZlxdpCj82CXl377DcrnlR45BlpDwtAXutREH7Qw6V96NSLymFmhlcJsS\nkgnB+Nd415irgcxpz7Xg1WkXSRE53Vbx1Phk9nnSl0MBzqPB/JBFWXBKyyA4cSxW\ndGLVgsCjEPDrQsZ65/pOJzR+bfj330sElpvMSH0Sihb6ilJolDESViwsnme5wAXP\nTE26FyZPyt5pB5oL+FQD4Wv6QZO1RP9d07lAi7WIWYUE1o5HyKCVa+TP5PvNFeM0\nCfddXmeY/NHFAtv/7Cl6vg5XQgg6aDyzVp2KN+fW2QKBgQD31tyU5p6o3W4yd6n7\nq11g/8Yii4+MbYIgqmrysqmjvoQxQ4os6+rCDHwvPyF92Odu9QQol91002tr48Yl\n8ewUfN1JQDqdgdobLAVxN4JZtn5A0Hy4M4pjoj931xPx4uT1eRCcO1GEhAOT4o2a\nAhifDLwNCwdfgAOBq8EXD9DPKwKBgQDOuVG5SGU8WbPrso9ilvFaEqTTJ9/H7XhX\nBxRv5uqPVnLUon14YRdBc6iCcPBRNdVDmJROm/PpV/eWsJMRdn94WCrMdMbksR8h\n1voAaFQF7OQCCCX0NKkzsYXGHFWa4uwKbRofanpfcQCLiDdA4E2O8vu41hNsRfKi\nyq3e0DS7WQKBgDWBwMuw4o4oiDMDHMLF43oenmM06D/0IIT25fIR2ogMiLOuFjXO\nlTdhxKnaoltuKcENyuEMsHYZcvavDUeB7Gsb7hZzdHQu5ay6G06vIkhGGwnZOSP3\nlKggDj3MRHUTfET25zwjnlzSt4cFAXc/fptP/4V9XREkLR2gvCZDdtxTAoGBAKBS\n84G6FuGORE64xiFVJUuRCAnHc/OvRVRhZkU/Fo0iI56rgpm42vtlArxfcNHa6VIq\nZGLu6mT/V0KkIPs7JrMj1dWJf7NfduCcxHlKcFfEGDVHMoBJ0ywHMtOpp+6erSeM\n4+SXhN6+WgjdFNUY4K3L3tPEG34uZXZBsEUMvsjJAoGAfmcmjbrfjkakDaZbi9V1\nJGrOP7N24azkAs8hJJ+NUFw/IZuywt3E0mJrkxxRza2FkvlRsql0uUxRminCUSKA\nDGMOd+JlA6S8TIhu9gJWktuxihqyYzimX0XewLXR+xPntPO+J1+RswIOZy0aGZu5\n1yqMWVaGxmRsdLiy0UMtaMc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@bihar-outreach.iam.gserviceaccount.com",
+  "client_id": "111185776470775867261",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40bihar-outreach.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
