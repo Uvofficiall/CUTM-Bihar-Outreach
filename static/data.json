@@ -35,8 +35,8 @@
       {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-users-cog"}
     ],
     "phd": [
-      {"prefix": "", "name": "BBA (General)", "icon": "fa-solid fa-user-nurse"},
-      {"prefix": "", "name": "BBA (Healthcare Management)", "icon": "fa-solid fa-users-cog"}
+      {"prefix": "", "name": "BBA (MARKETING)", "icon": "fa-solid fa-user-nurse"},
+      {"prefix": "", "name": "BBA (FINANCE)", "icon": "fa-solid fa-users-cog"}
     ],
     "diploma": [
       {"prefix": "", "name": "Bachelor of Computer Applications (BCA) ", "icon": "fa-solid fa-user-nurse"}
