@@ -2095,6 +2095,8 @@ a {
     border-radius: 50%;
     color: var(--white);
     font-size: 1.2rem;
+    position: relative;
+    z-index: 2147483647; /* Ensures links are clickable above floating buttons */
 }
 
 .social-links a:hover {
