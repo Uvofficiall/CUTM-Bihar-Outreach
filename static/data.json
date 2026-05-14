@@ -21,7 +21,7 @@
       {"prefix": "", "name": "Electrical & Electronics Engineering (EEE)", "icon": "fa-solid fa-atom"},
       {"prefix": "", "name": "Electronics & Communication Engineering (ECE)", "icon": "fa-solid fa-dna"},
       {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-ruler-combined"},
-      {"prefix": "", "name": "Aerospace Engineering", "icon": "fa-solid fa-fingerprint"},
+      
       {"prefix": "", "name": "Biotechnology Engineering", "icon": "fa-solid fa-users-cog"}
     ],
     "postgraduate": [
@@ -30,7 +30,7 @@
       {"prefix": "", "name": "Electrical Engineering", "icon": "fa-solid fa-capsules"},
       {"prefix": "", "name": "Electronics & Communication Engineering", "icon": "fa-solid fa-atom"},
       {"prefix": "", "name": "Computer Science Engineering", "icon": "fa-solid fa-dna"},
-      {"prefix": "", "name": "Information Technology", "icon": "fa-solid fa-ruler-combined"},
+      
       {"prefix": "", "name": "Automobile Engineering", "icon": "fa-solid fa-fingerprint"},
       {"prefix": "", "name": "Mining Engineering", "icon": "fa-solid fa-users-cog"}
     ],
