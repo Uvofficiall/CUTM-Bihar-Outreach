@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                        📊 <strong>BBA</strong> (Business Administration)<br>
                        💼 <strong>MBA</strong> (MBA in Agribusiness)<br>
                        ⚙️ <strong>Diploma Engineering</strong><br>
-                       🌾 <strong>B.Sc</strong> (Agriculture/Science)<br><br>
+                       
                        📢 <strong>IMPORTANT NOTICE</strong> 😀<br>
                        Good news for Bihar students! Bihar Student's Credit Card facility is available for B.Tech, BCA, BBA, and Diploma courses.`
         },
